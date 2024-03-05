@@ -41,18 +41,6 @@ namespace Praktika_circle_movement
             yDir = 1;
         }
 
-        //Функция реализующая движение круга
-        private void timer_circle_Tick(object sender, EventArgs e)
-        {
-            //обработка отскока круга от стенок PictureBox
-            if (x0 - radius <= 0) xDir = 1;                        //правая граница
-            if (x0 + radius >= pictBox_circle.Width) xDir = -1;    //левая граница
-            if (y0 - radius <= 0) yDir = 1;                        //нижняя граница
-            if (y0 + radius > pictBox_circle.Height) yDir = -1;    //верхняя граница
-            x0 += xDir; y0 += yDir;
-            pictBox_circle.Invalidate();
-        }
-
         //Функция считывания новой скорости передвижения круга
         private void trackBar_speed_circle_Scroll(object sender, EventArgs e)
         {
@@ -69,6 +57,37 @@ namespace Praktika_circle_movement
         private void btn_stop_Click(object sender, EventArgs e)
         {
             timer_circle.Stop();
+        }
+
+        //Функция реализующая движение круга
+        private void timer_circle_Tick(object sender, EventArgs e)
+        {
+            //обработка отскока круга от стенок PictureBox
+            if (x0 - radius <= 0) xDir = 1;                        //правая граница
+            if (x0 + radius >= pictBox_circle.Width) xDir = -1;    //левая граница
+            if (y0 - radius <= 0) yDir = 1;                        //нижняя граница
+            if (y0 + radius > pictBox_circle.Height) yDir = -1;    //верхняя граница
+            x0 += xDir; y0 += yDir;
+            pictBox_circle.Invalidate();
+        }
+
+        //Функция отрисовки круга и его движения
+        private void pictBox_circle_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            g.Clear(Color.White);
+
+            //Создание кисти желтой штриховой
+            HatchBrush brush = new HatchBrush(HatchStyle.SolidDiamond, my_color);
+
+            //Круг
+            g.FillEllipse(brush, x0 - radius, y0 - radius, 2 * radius, 2 * radius);
+            path.Reset();
+            path.StartFigure();   //формирование фигуры
+
+            //добавление круга в фигуру
+            path.AddEllipse(x0 - radius, y0 - radius, 2 * radius, 2 * radius);
+            path.CloseFigure();   //закрытие фигуры
         }
 
         //Функция обработки события при нажаии левый клавиши мыши
@@ -91,25 +110,6 @@ namespace Praktika_circle_movement
                     }
                 }
             }
-        }
-
-        //Функция отрисовки круга и его движения
-        private void pictBox_circle_Paint(object sender, PaintEventArgs e)
-        {
-            Graphics g = e.Graphics;
-            g.Clear(Color.White);
-
-            //Создание кисти желтой штриховой
-            HatchBrush brush = new HatchBrush(HatchStyle.SolidDiamond, my_color);
-
-            //Круг
-            g.FillEllipse(brush, x0 - radius, y0 - radius, 2 * radius, 2 * radius);
-            path.Reset();
-            path.StartFigure();   //формирование фигуры
-
-            //добавление круга в фигуру
-            path.AddEllipse(x0 - radius, y0 - radius, 2 * radius, 2 * radius);
-            path.CloseFigure();   //закрытие фигуры
         }
     }
 }

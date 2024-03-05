@@ -91,6 +91,10 @@
             this.Controls.Add(this.btn_stop);
             this.Controls.Add(this.btn_start);
             this.Controls.Add(this.pictBox_circle);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(538, 363);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(538, 363);
             this.Name = "circle_movement";
             this.Text = "circle_movement";
             this.Load += new System.EventHandler(this.circle_movement_Load);

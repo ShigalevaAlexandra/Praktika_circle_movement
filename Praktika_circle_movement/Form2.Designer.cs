@@ -104,6 +104,10 @@
             this.Controls.Add(this.radioBtn_red);
             this.Controls.Add(this.radioBtn_yellow);
             this.Controls.Add(this.radioBtn_black);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(274, 322);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(274, 322);
             this.Name = "Circle_color";
             this.Text = "Circle_color";
             this.ResumeLayout(false);
